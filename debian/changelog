@@ -1,3 +1,12 @@
+tzdata (2020f-0ubuntu0.20.04) focal; urgency=medium
+
+  * New upstream version (LP: #1909698), affecting the following timestamp:
+    - Volgograd switches to Moscow time on 2020-12-27 at 02:00.
+  * ICU timezone data files are still version 2020d as they have not yet been
+    updated by upstream.
+
+ -- Brian Murray <brian@ubuntu.com>  Tue, 05 Jan 2021 16:30:37 -0800
+
 tzdata (2020d-0ubuntu0.20.04) focal; urgency=medium
 
   * New upstream version (LP: #1901020), affecting past and future timestamps:
