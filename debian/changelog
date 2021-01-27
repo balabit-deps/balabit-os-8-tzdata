@@ -1,3 +1,12 @@
+tzdata (2021a-0ubuntu0.20.04) focal; urgency=medium
+
+  * New upstream version (LP: #1913482), affecting the following future timestamp:
+    - South Sudan changes from +03 to +02 on 2021-02-01 at 00:00.
+  * Update ICU timezone data files which are utilized by php and update them
+    to 2021a.
+
+ -- Brian Murray <brian@ubuntu.com>  Wed, 27 Jan 2021 13:32:53 -0800
+
 tzdata (2020f-0ubuntu0.20.04.1) focal; urgency=medium
 
   * Update ICU timezone data files which are utilized by php to version 2020f.
