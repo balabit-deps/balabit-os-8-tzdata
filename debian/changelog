@@ -1,3 +1,13 @@
+tzdata (2021e-0ubuntu0.20.04) focal; urgency=medium
+
+  * New upstream release (LP: #1948698), affecting the following timestamp:
+    - Palestine will fall back 2021-10-29 (not 2021-10-30) at 01:00.
+  * Update ICU timezone data files which are utilized by php to 2021a3.
+  * Dropped the patches which were cherry-picked from upstream as the
+    situation is somewhat less confused now.
+
+ -- Brian Murray <brian@ubuntu.com>  Mon, 25 Oct 2021 16:58:28 -0700
+
 tzdata (2021a-2ubuntu0.20.04) focal; urgency=medium
 
   * Merge from Debian unstable (LP: #1945527). Remaining changes:
