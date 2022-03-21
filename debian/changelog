@@ -1,3 +1,10 @@
+tzdata (2022a-0ubuntu0.20.04) focal; urgency=medium
+
+  * New upstream release (LP: #1965791):
+    - Palestine will spring forward on 2022-03-27 (not 2022-03-26).
+
+ -- Brian Murray <brian@ubuntu.com>  Mon, 21 Mar 2022 13:26:35 -0700
+
 tzdata (2021e-0ubuntu0.20.04) focal; urgency=medium
 
   * New upstream release (LP: #1948698), affecting the following timestamp:
