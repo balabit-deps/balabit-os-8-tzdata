@@ -1,3 +1,13 @@
+tzdata (2022c-0ubuntu0.20.04.0) focal; urgency=medium
+
+  * New upstream release (LP: #1986984):
+    - Chile will spring forward on 2022-09-11, not 2022-09-04
+    - Iran no longer observes DST
+  * Update ICU data to latest (2022b)
+  * d/po/*.po: change Kiev msgids to Kyiv to reflect upstream change
+
+ -- Simon Chopin <schopin@ubuntu.com>  Tue, 30 Aug 2022 10:16:55 +0200
+
 tzdata (2022a-0ubuntu0.20.04) focal; urgency=medium
 
   * New upstream release (LP: #1965791):

@@ -2771,7 +2771,7 @@ msgstr "Moscou -01 (Kaliningrad)"
 #. Choices
 #. Translators: do not translate underscores. You can use spaces instead.
 #: ../tzdata.templates:9001
-msgid "Kiev"
+msgid "Kyiv"
 msgstr "Kiyeef"
 
 #. Type: select

@@ -2764,7 +2764,7 @@ msgstr "קלינינגרד"
 #. Choices
 #. Translators: do not translate underscores. You can use spaces instead.
 #: ../tzdata.templates:9001
-msgid "Kiev"
+msgid "Kyiv"
 msgstr "קייב"
 
 #. Type: select
