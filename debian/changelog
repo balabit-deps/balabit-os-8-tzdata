@@ -1,3 +1,17 @@
+tzdata (2022e-0ubuntu0.20.04.0) focal; urgency=medium
+
+  * New upstream releases (LP: #1992692):
+    - Palestine transitions are now Saturdays at 02:00. This means 2022 falls
+      back 10-29 at 02:00, not 10-28 at 01:00.
+    - Simplify three Ukraine zones into one. (LP: #1969671)
+    - Jordan and Syria switch from +02/+03 with DST to year-round
+  * debian/tzdata.templates and debian/tzdata.config:
+    - Convert Europe/Kiev into Europe/Kyiv
+    - Remove Uzhgorod and Zaporozhye
+  * Update the ICU timezone data to 2022e
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Mon, 17 Oct 2022 15:48:16 +0200
+
 tzdata (2022c-0ubuntu0.20.04.0) focal; urgency=medium
 
   * New upstream release (LP: #1986984):
