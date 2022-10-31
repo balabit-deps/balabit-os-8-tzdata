@@ -1,3 +1,13 @@
+tzdata (2022f-0ubuntu0.20.04.0) focal; urgency=medium
+
+  * New upstream release (LP: #1995209):
+    - Mexico will no longer observe DST except near the US border.
+    - Chihuahua has moved to year-round -06 on 2022-10-30.
+    - Fiji no longer observes DST.
+  * No ICU data update yet as none is yet available upstream.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 31 Oct 2022 02:02:00 +0100
+
 tzdata (2022e-0ubuntu0.20.04.0) focal; urgency=medium
 
   * New upstream releases (LP: #1992692):
