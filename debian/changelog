@@ -1,3 +1,9 @@
+tzdata (2022f-0ubuntu0.20.04.1) focal; urgency=medium
+
+  * Update ICU data to 2022f (LP: #1995601)
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Mon, 07 Nov 2022 11:01:07 +0100
+
 tzdata (2022f-0ubuntu0.20.04.0) focal; urgency=medium
 
   * New upstream release (LP: #1995209):
