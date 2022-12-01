@@ -1,3 +1,22 @@
+tzdata (2022g-0ubuntu0.20.04.1) focal; urgency=medium
+
+  * Update the ICU timezone data to 2022g (LP: #1998321)
+  * Point Vcs-Browser/Git to Launchpad
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Thu, 01 Dec 2022 13:54:53 +0100
+
+tzdata (2022g-0ubuntu0.20.04.0) focal; urgency=medium
+
+  * New upstream release (LP: #1998321)
+    - The northern edge of Chihuahua changes to US timekeeping.
+    - Much of Greenland stops changing clocks after March 2023.
+    - Fix some pre-1996 timestamps in northern Canada.
+  * No ICU data update yet as none is yet available upstream.
+  * d/watch: Switch from failing ftp to https
+  * debian/tzdata.templates: Add Ciudad_Juarez
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Wed, 30 Nov 2022 18:58:02 +0100
+
 tzdata (2022f-0ubuntu0.20.04.1) focal; urgency=medium
 
   * Update ICU data to 2022f (LP: #1995601)
