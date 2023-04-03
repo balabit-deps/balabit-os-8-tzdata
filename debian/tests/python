@@ -1,0 +1,134 @@
+#!/usr/bin/python3
+
+# Author: Benjamin Drung <bdrung@ubuntu.com>
+
+"""Test timezones using pytz module."""
+
+import datetime
+import functools
+import os
+import sys
+import typing
+import unittest
+
+import pytz
+
+
+def _is_tzif_file(fpath):
+    with open(fpath, "rb") as tz_file:
+        return tz_file.read(4) == b"TZif"
+
+
+@functools.lru_cache(maxsize=1)
+def available_timezones():
+    """Return a set of available timezones.
+
+    Search in PYTZ_TZDATADIR if set or in the system location.
+    """
+    available = set()
+    tz_root = os.environ.get("PYTZ_TZDATADIR", "/usr/share/zoneinfo")
+    for root, dirnames, files in os.walk(tz_root):
+        if root == tz_root:
+            # right/ and posix/ are special directories and shouldn't be
+            # included in the output of available zones
+            if "right" in dirnames:
+                dirnames.remove("right")
+            if "posix" in dirnames:
+                dirnames.remove("posix")
+
+        for file in files:
+            fpath = os.path.join(root, file)
+            key = os.path.relpath(fpath, start=tz_root)
+            if _is_tzif_file(fpath):
+                available.add(key)
+
+    return available
+
+
+class TestZoneinfo(unittest.TestCase):
+    """Test timezones using pytz module."""
+
+    def _hours(self, delta: typing.Optional[datetime.timedelta]) -> int:
+        assert delta is not None
+        total_seconds = int(delta.total_seconds())
+        self.assertEqual(total_seconds % 3600, 0)
+        return total_seconds // 3600
+
+    def test_available_timezones_count(self) -> None:
+        """Test available_timezones() count to be reasonable."""
+        zones = len(available_timezones())
+        self.assertGreaterEqual(zones, 597, "less zones than 2022g-0ubuntu0.22.10.1")
+        self.assertLess(
+            zones, round(597 * 1.1), ">10% more zones than 2022g-0ubuntu0.22.10.1"
+        )
+
+    def _test_equal_zones(self, timezone1, timezone2) -> None:
+        """Test timezones to be heuristically equal regardless of the name."""
+        date1 = timezone1.localize(datetime.datetime(2020, 10, 31, 12))
+        date2 = timezone2.localize(datetime.datetime(2020, 10, 31, 12))
+        self.assertEqual(date1.tzname(), date2.tzname())
+        self.assertEqual(date1 - date2, datetime.timedelta(seconds=0))
+
+        date1 = timezone1.localize(datetime.datetime(2021, 7, 3, 12))
+        date2 = timezone2.localize(datetime.datetime(2021, 7, 3, 12))
+        self.assertEqual(date1.tzname(), date2.tzname())
+        self.assertEqual(date1 - date2, datetime.timedelta(seconds=0))
+
+    def test_systemv_timezones(self) -> None:
+        """Test that the old SystemV timezones are still available."""
+        systemv = [t for t in available_timezones() if t.startswith("SystemV/")]
+        self.assertIn("SystemV/MST7", systemv)
+        self.assertEqual(len(systemv), 13, f"SystemV timezones: {systemv}")
+
+    def _test_timezone(self, zone: str) -> None:
+        """Test zone to load, have a name, and have a reasonable offset."""
+        timezone = pytz.timezone(zone)
+        self.assertEqual(str(timezone), zone)
+        date = timezone.localize(datetime.datetime(2020, 10, 31, 12))
+
+        tzname = date.tzname()
+        assert tzname is not None
+        self.assertGreaterEqual(len(tzname), 3, tzname)
+        self.assertLessEqual(len(tzname), 5, tzname)
+
+        utc_offset = date.utcoffset()
+        assert utc_offset is not None
+        self.assertEqual(int(utc_offset.total_seconds()) % 900, 0)
+        self.assertLessEqual(utc_offset, datetime.timedelta(hours=14))
+
+    @unittest.skip("Needs https://launchpad.net/bugs/207604")
+    def test_timezones(self) -> None:
+        """Test all zones to load, have a name, and have a reasonable offset."""
+        for zone in available_timezones():
+            with self.subTest(zone=zone):
+                self._test_timezone(zone)
+
+    @unittest.skip("Needs https://launchpad.net/bugs/207604")
+    def test_2022g(self) -> None:
+        """Test new zone America/Ciudad_Juarez from 2022g release."""
+        timezone = pytz.timezone("America/Ciudad_Juarez")
+        date = timezone.localize(datetime.datetime(2022, 12, 1))
+        self.assertEqual(self._hours(date.utcoffset()), -7)
+
+    def test_2023a(self) -> None:
+        """Test Egypt uses DST again from 2023a release."""
+        timezone = pytz.timezone("Africa/Cairo")
+        date = timezone.localize(datetime.datetime(2023, 4, 28, 12, 0))
+        self.assertEqual(self._hours(date.utcoffset()), 3)
+
+    def test_2023c(self) -> None:
+        """Test Lebanon's reverted DST delay from 2023c release."""
+        timezone = pytz.timezone("Asia/Beirut")
+        date = timezone.localize(datetime.datetime(2023, 4, 2))
+        self.assertEqual(self._hours(date.utcoffset()), 3)
+
+
+def main() -> None:
+    """Run unit tests in verbose mode."""
+    argv = sys.argv.copy()
+    argv.insert(1, "-v")
+    unittest.main(argv=argv)
+
+
+if __name__ == "__main__":
+    main()
