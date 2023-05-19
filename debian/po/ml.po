@@ -2118,13 +2118,6 @@ msgstr "ഗാസ"
 #. Choices
 #. Translators: do not translate underscores. You can use spaces instead.
 #: ../tzdata.templates:7001
-msgid "Hanoi"
-msgstr ""
-
-#. Type: select
-#. Choices
-#. Translators: do not translate underscores. You can use spaces instead.
-#: ../tzdata.templates:7001
 msgid "Harbin"
 msgstr "ഹാര്‍ബിന്‍"
 

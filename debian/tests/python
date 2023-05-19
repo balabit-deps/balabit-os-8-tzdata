@@ -7,6 +7,8 @@
 import datetime
 import functools
 import os
+import pathlib
+import re
 import sys
 import typing
 import unittest
@@ -44,6 +46,19 @@ def available_timezones():
 
     return available
 
+ROOT_DIR = pathlib.Path(__file__).parent.parent.parent
+
+
+def read_backwards_links(backwards_file: pathlib.Path):
+    """Read backwards compatibility links from the upstream backwards file."""
+    backwards_links = {}
+    for line in backwards_file.read_text(encoding="utf-8").splitlines():
+        match = re.match(r"^Link\t(?P<target>\S+)\t+(?P<link_name>\S+)", line)
+        if not match:
+            continue
+        backwards_links[match.group("link_name")] = match.group("target")
+    return backwards_links
+
 
 class TestZoneinfo(unittest.TestCase):
     """Test timezones using pytz module."""
@@ -57,22 +72,23 @@ class TestZoneinfo(unittest.TestCase):
     def test_available_timezones_count(self) -> None:
         """Test available_timezones() count to be reasonable."""
         zones = len(available_timezones())
-        self.assertGreaterEqual(zones, 597, "less zones than 2022g-0ubuntu0.22.10.1")
-        self.assertLess(
-            zones, round(597 * 1.1), ">10% more zones than 2022g-0ubuntu0.22.10.1"
-        )
+        self.assertGreaterEqual(zones, 597, "less zones than 2022g-2")
+        self.assertLess(zones, round(597 * 1.1), ">10% more zones than 2022g-2")
 
-    def _test_equal_zones(self, timezone1, timezone2) -> None:
+    def _assert_equal_zones_at_date(
+        self, date: datetime.datetime, timezone1, timezone2
+    ) -> None:
+        date1 = timezone1.localize(date)
+        date2 = timezone2.localize(date)
+        self.assertEqual(date1 - date2, datetime.timedelta(seconds=0))
+        self.assertEqual(date1.tzname(), date2.tzname())
+
+    def _assert_equal_zones(self, timezone1, timezone2) -> None:
         """Test timezones to be heuristically equal regardless of the name."""
-        date1 = timezone1.localize(datetime.datetime(2020, 10, 31, 12))
-        date2 = timezone2.localize(datetime.datetime(2020, 10, 31, 12))
-        self.assertEqual(date1.tzname(), date2.tzname())
-        self.assertEqual(date1 - date2, datetime.timedelta(seconds=0))
-
-        date1 = timezone1.localize(datetime.datetime(2021, 7, 3, 12))
-        date2 = timezone2.localize(datetime.datetime(2021, 7, 3, 12))
-        self.assertEqual(date1.tzname(), date2.tzname())
-        self.assertEqual(date1 - date2, datetime.timedelta(seconds=0))
+        october_2020 = datetime.datetime(2020, 10, 31, 12)
+        self._assert_equal_zones_at_date(october_2020, timezone1, timezone2)
+        july_2021 = datetime.datetime(2021, 7, 3, 12)
+        self._assert_equal_zones_at_date(july_2021, timezone1, timezone2)
 
     def test_systemv_timezones(self) -> None:
         """Test that the old SystemV timezones are still available."""
@@ -103,6 +119,25 @@ class TestZoneinfo(unittest.TestCase):
         self.assertEqual(self._hours(berlin.localize(date).utcoffset()), 1)
         oslo = pytz.timezone("Europe/Oslo")
         self.assertEqual(self._hours(oslo.localize(date).utcoffset()), 2)
+
+    def test_post_1970_symlinks_consistency(self) -> None:
+        """Test that post-1970 symlinks are consistent with pre-1970 timezones.
+
+        Building tzdata with PACKRATDATA=backzone will result in separate
+        time zones for time zones that differ only before 1970. These time
+        zones should behave identical after 1970. Building tzdata without
+        PACKRATDATA=backzone will result in one of the time zones become a
+        symlink to the other time zone.
+        """
+        links = read_backwards_links(ROOT_DIR / "backward")
+        for link_name, target in links.items():
+            with self.subTest(f"{link_name} -> {target}"):
+                tz_link = pytz.timezone(link_name)
+                tz_target = pytz.timezone(target)
+                now = datetime.datetime.now()
+                self._assert_equal_zones_at_date(now, tz_link, tz_target)
+                future = now + datetime.timedelta(days=30 * 6)
+                self._assert_equal_zones_at_date(future, tz_link, tz_target)
 
     @unittest.skip("Needs https://launchpad.net/bugs/207604")
     def test_timezones(self) -> None:
