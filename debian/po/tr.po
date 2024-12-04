@@ -165,6 +165,17 @@ msgid "Etc"
 msgstr "Diğer"
 
 #. Type: select
+#. Choices
+#. Note to translators:
+#. - "Etc" will present users with a list
+#. of "GMT+xx" or "GMT-xx" timezones
+#. - SystemV will give the choice between zone named as per SystemV conventions:
+#. EST5, MST7, etc.
+#: ../tzdata.templates:1001
+msgid "Legacy"
+msgstr ""
+
+#. Type: select
 #. Description
 #: ../tzdata.templates:1002
 msgid "Geographic area:"
@@ -579,11 +590,14 @@ msgstr "Windhoek"
 #. Description
 #. Type: select
 #. Description
+#. Type: select
+#. Description
 #: ../tzdata.templates:2002 ../tzdata.templates:3002 ../tzdata.templates:4002
 #: ../tzdata.templates:5002 ../tzdata.templates:6002 ../tzdata.templates:7002
 #: ../tzdata.templates:8002 ../tzdata.templates:9002 ../tzdata.templates:10002
 #: ../tzdata.templates:11002 ../tzdata.templates:12001
 #: ../tzdata.templates:13002 ../tzdata.templates:14001
+#: ../tzdata.templates:15001
 msgid "Time zone:"
 msgstr "Saat dilimi:"
 
@@ -613,11 +627,14 @@ msgstr "Saat dilimi:"
 #. Description
 #. Type: select
 #. Description
+#. Type: select
+#. Description
 #: ../tzdata.templates:2002 ../tzdata.templates:3002 ../tzdata.templates:4002
 #: ../tzdata.templates:5002 ../tzdata.templates:6002 ../tzdata.templates:7002
 #: ../tzdata.templates:8002 ../tzdata.templates:9002 ../tzdata.templates:10002
 #: ../tzdata.templates:11002 ../tzdata.templates:12001
 #: ../tzdata.templates:13002 ../tzdata.templates:14001
+#: ../tzdata.templates:15001
 msgid "Please select the city or region corresponding to your time zone."
 msgstr "Lütfen saat diliminize karşılık gelen şehir ya da bölgeyi seçin."
 
