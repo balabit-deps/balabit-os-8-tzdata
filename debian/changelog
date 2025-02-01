@@ -1,3 +1,11 @@
+tzdata (2024b-0ubuntu0.20.04.1) focal; urgency=medium
+
+  * Revert using %z in tzdata.zi data form (LP: #2096974):
+    - Enable link to link feature also for rearguard dataform
+    - Use dataform rearguard for C++ std::chrono
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Sat, 01 Feb 2025 13:04:09 +0100
+
 tzdata (2024b-0ubuntu0.20.04) focal; urgency=medium
 
   * New upstream release (LP: #2079966):
