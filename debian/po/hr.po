@@ -3551,8 +3551,3 @@ msgstr ""
 #| msgid "Moncton"
 msgid "Mountain"
 msgstr "Moncton"
-
-#, fuzzy
-#~| msgid "Pacific"
-#~ msgid "Pacific-New"
-#~ msgstr "Pacific"

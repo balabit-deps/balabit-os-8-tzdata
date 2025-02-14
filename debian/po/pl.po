@@ -3517,6 +3517,3 @@ msgstr "Michigan"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "Czas górski"
-
-#~ msgid "Pacific-New"
-#~ msgstr "Pacific-New"

@@ -3547,6 +3547,3 @@ msgstr "Michigan"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "Montaña"
-
-#~ msgid "Pacific-New"
-#~ msgstr "Nuevo Pacífico"

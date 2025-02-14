@@ -1,3 +1,17 @@
+tzdata (2025a-0ubuntu0.20.04) focal; urgency=medium
+
+  * New upstream release (LP: #2095233):
+    - Paraguay adopts permanent -03 starting spring 2024
+    - No leap second on 2025-06-30
+  * Add autopkgtest test case for 2025a release
+  * debian/rules: rename icu-data branch from master to main
+  * Update the ICU timezone data to 2025a
+  * Add autopkgtest test case for ICU timezone data 2025a
+  * Drop unused translations
+  * Override lintian's unused-debconf-template
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Fri, 14 Feb 2025 23:00:32 +0100
+
 tzdata (2024b-0ubuntu0.20.04.1) focal; urgency=medium
 
   * Revert using %z in tzdata.zi data form (LP: #2096974):

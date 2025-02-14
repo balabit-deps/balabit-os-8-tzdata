@@ -3722,6 +3722,3 @@ msgstr "Michigan"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "Muntanya"
-
-#~ msgid "Pacific-New"
-#~ msgstr "Pacific-New"

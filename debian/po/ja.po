@@ -3507,6 +3507,3 @@ msgstr "ミシガン"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "マウンテン"
-
-#~ msgid "Pacific-New"
-#~ msgstr "太平洋-新"

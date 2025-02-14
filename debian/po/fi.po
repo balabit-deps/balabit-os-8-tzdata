@@ -3526,8 +3526,3 @@ msgstr ""
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "Vuori"
-
-#, fuzzy
-#~| msgid "Pacific"
-#~ msgid "Pacific-New"
-#~ msgstr "Tyyni valtameri"

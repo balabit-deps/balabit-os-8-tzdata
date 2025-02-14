@@ -3521,6 +3521,3 @@ msgstr "મિશિગન"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "માઉન્ટેન"
-
-#~ msgid "Pacific-New"
-#~ msgstr "પેસેફિક-નવું"

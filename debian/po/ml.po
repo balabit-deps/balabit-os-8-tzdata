@@ -3544,8 +3544,3 @@ msgstr ""
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Pacific"
-#~ msgid "Pacific-New"
-#~ msgstr "പസഫിക്"

@@ -3513,6 +3513,3 @@ msgstr "มิชิแกน"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "ภูเขา"
-
-#~ msgid "Pacific-New"
-#~ msgstr "แปซิฟิก-ใหม่"

@@ -3517,6 +3517,3 @@ msgstr "Michigan"
 #: ../tzdata.templates:13001
 msgid "Mountain"
 msgstr "Americké horské"
-
-#~ msgid "Pacific-New"
-#~ msgstr "Tichomorské nové"
