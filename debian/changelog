@@ -1,3 +1,10 @@
+tzdata (2025b-0ubuntu0.20.04.1) focal; urgency=medium
+
+  * Update the ICU timezone data to 2025b (LP: #2107950)
+  * Add autopkgtest test case for ICU timezone data 2025b
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Tue, 22 Apr 2025 12:20:10 +0200
+
 tzdata (2025b-0ubuntu0.20.04) focal; urgency=medium
 
   * New upstream release (LP: #2104284):
